@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sky sheets</title>
+        <link rel="stylesheet" href="../../assets/css/style.css">
+        <link rel="icon" href="../../assets/images/logos/logo_white.svg" type="image/svg+xml">
+
+    </head>
+    <body>
+        <header>
+            <div class="nav-head" style="padding: 0; width: 100%;">
+                <h1>Sky sheets</h1>
+            </div>
+            <div class="container">
+
+                <nav>
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="skysheets.html" class="active">Music sheets</a></li>
+                        <li><a href="blogs.html">Weblogs</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Centered search bar -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by Name or Author...">
+            </div>
+            <!-- Centered table container -->
+            <div>
+                <table class="table-container">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">Ord.</th>
+                            <th>Name</th>
+                            <th>Author</th>
+                            <th style="width: 10%;">Language</th>
+                            <th style="width: 7%;">Length</th>
+                            <th style="width: 10%;">Instrument</th>
+                            <th style="width: 6%;">Major</th>
+                            <th style="width: 6%;">BPM</th>
+                            <th style="width: 12%;">Last updated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="music-table-body">
+                        <!-- Music data will be dynamically added here -->
+                    </tbody>
+                </table>
+                <div id="pagination">
+                    <button id="prevPage" disabled>Previous</button>
+                    <span id="pageInfo">Page </span>
+                    <button id="nextPage">Next</button>
+                </div>
+            </div>
+            <div id="loading" class="loading" style="display: none;">Loading...</div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 drafts. All rights reserved (nah).</p>
+            </div>
+        </footer>
+
+        <!-- Add this just before the closing </body> tag -->
+        <div id="file-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <pre id="file-content">Loading...</pre>
+            </div>
+        </div>
+
+        <!-- Add the JavaScript file just before the closing body tag -->
+        <script src="../../src/main/cache.js"></script>
+        <script src="../../src/main/fetchCSV.js"></script>
+        <script src="../../src/main/table.js"></script>
+        <script>
+            fetchCSV(); // Fetch CSV data
+        </script>
+
+        <canvas id="canvas"></canvas>
+        <script src="../../src/main/petals.js"></script>
+        </body>
+</html>

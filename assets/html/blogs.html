@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyMusic - Blogs</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SkyMusic Blog</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <aside class="sidebar">
+            <section class="widget categories">
+                <h2>Categories</h2>
+                <ul id="blogTree">
+                    <li>Music Theory
+                        <ul>
+                            <li><a href="#">Understanding Major Scales</a></li>
+                            <li><a href="#">Chord Progressions</a></li>
+                        </ul>
+                    </li>
+                    <li>Composition
+                        <ul>
+                            <li><a href="#">Writing Melodies</a></li>
+                        </ul>
+                    </li>
+                    <li>Performance
+                        <ul>
+                            <li><a href="#">Improving Sight Reading</a></li>
+                        </ul>
+                    </li>
+                    <li>Reviews
+                        <ul>
+                            <li><a href="#">Top 10 Classical Composers</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+        <div class="blog-posts">
+            <div class="search-bar">
+                <input type="text" id="blogSearchInput" placeholder="Search Blogs by Title or Category...">
+            </div>
+            <h2>Recent Posts</h2>
+            <article class="post">
+                <h3>Title of the Latest Blog Post</h3>
+                <p>Date: September 11, 2024</p>
+                <p>Summary of the blog post goes here. Click to read more...</p>
+                <a href="#" class="read-more">Read More</a>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SkyMusic. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Search functionality for blogs
+        document.getElementById('blogSearchInput').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                const postText = post.textContent.toLowerCase();
+                post.style.display = postText.includes(searchValue) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
