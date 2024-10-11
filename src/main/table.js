@@ -110,22 +110,6 @@ function removeDiacritics(str) {
     return str.split('').map(char => diacriticsMap[char] || char).join('');
 }
 
-// Search functionality
-document.getElementById('searchInput').addEventListener('input', function() {
-    const searchValue = removeDiacritics(this.value.toLowerCase());
-    const rows = document.querySelectorAll('#music-table-body tr');
-
-    rows.forEach(row => {
-        const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-        const author = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-
-        const normalizedName = removeDiacritics(name);
-        const normalizedAuthor = removeDiacritics(author);
-
-        row.style.display = (normalizedName.includes(searchValue) || normalizedAuthor.includes(searchValue)) ? '' : 'none';
-    });
-});
-
 // Function to convert Japanese characters to Romaji (basic version)
 function convertToRomaji(japaneseText) {
     const romajiMap = {
@@ -144,31 +128,6 @@ function convertToRomaji(japaneseText) {
 
     return japaneseText.split('').map(char => romajiMap[char] || char).join('');
 }
-
-// Updated search functionality to include Romaji search
-document.getElementById('searchInput').addEventListener('input', function() {
-    const searchValue = removeDiacritics(this.value.toLowerCase());
-    const rows = document.querySelectorAll('#music-table-body tr');
-
-    rows.forEach(row => {
-        const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-        const author = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-
-        const normalizedName = removeDiacritics(name);
-        const normalizedAuthor = removeDiacritics(author);
-
-        // Convert Japanese name and author to Romaji for searching
-        const romajiName = convertToRomaji(name);
-        const romajiAuthor = convertToRomaji(author);
-
-        row.style.display = (
-            normalizedName.includes(searchValue) ||
-            normalizedAuthor.includes(searchValue) ||
-            romajiName.includes(searchValue) ||
-            romajiAuthor.includes(searchValue)
-        ) ? '' : 'none';
-    });
-});
 
 // Function to convert Korean characters to Romaja using Revised Romanization
 function convertToRomaja(koreanText) {
@@ -226,7 +185,14 @@ function convertToRomaja(koreanText) {
     return romaja;
 }
 
-// Updated search functionality to include Romaja search
+// Function to convert Chinese characters to Pinyin
+function convertToPinyin(text) {
+    return pinyin(text, {
+        style: pinyin.STYLE_NORMAL,
+        heteronym: false
+    }).join(' ');
+}
+
 document.getElementById('searchInput').addEventListener('input', function() {
     const searchValue = removeDiacritics(this.value.toLowerCase());
     const rows = document.querySelectorAll('#music-table-body tr');
@@ -238,42 +204,28 @@ document.getElementById('searchInput').addEventListener('input', function() {
         const normalizedName = removeDiacritics(name);
         const normalizedAuthor = removeDiacritics(author);
 
-        // Convert Korean name and author to Romaja for searching
-        const romajaName = convertToRomaja(name);
-        const romajaAuthor = convertToRomaja(author);
-
-        row.style.display = (
-            normalizedName.includes(searchValue) ||
-            normalizedAuthor.includes(searchValue) ||
-            romajaName.includes(searchValue) ||
-            romajaAuthor.includes(searchValue)
-        ) ? '' : 'none';
-    });
-});
-
-// Function to convert Chinese characters to Pinyin
-function convertToPinyin(text) {
-    return pinyin(text, {
-        style: pinyin.STYLE_NORMAL,
-        heteronym: false
-    }).join(' ');
-}
-
-// Optimized search function
-document.getElementById('searchInput').addEventListener('input', function() {
-    const searchValue = this.value.toLowerCase();
-    const rows = document.querySelectorAll('#music-table-body tr');
-    rows.forEach(row => {
-        const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-        const author = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-        
         // Convert Chinese name and author to Pinyin
         const chineseName = convertToPinyin(name);
         const chineseAuthor = convertToPinyin(author);
         
-        const matches = name.includes(searchValue) || author.includes(searchValue) ||
-                        chineseName.includes(searchValue) || chineseAuthor.includes(searchValue);
+        // Convert Korean name and author to Romaja
+        const romajaName = convertToRomaja(name);
+        const romajaAuthor = convertToRomaja(author);
         
+        // Convert Japanese name and author to Romaji
+        const romajiName = convertToRomaji(name);
+        const romajiAuthor = convertToRomaji(author);
+
+        // Check for matches
+        const matches = normalizedName.includes(searchValue) ||
+                        normalizedAuthor.includes(searchValue) ||
+                        chineseName.includes(searchValue) ||
+                        chineseAuthor.includes(searchValue) ||
+                        romajaName.includes(searchValue) ||
+                        romajaAuthor.includes(searchValue) ||
+                        romajiName.includes(searchValue) ||
+                        romajiAuthor.includes(searchValue);
+
         row.style.display = matches ? '' : 'none';
     });
 });
