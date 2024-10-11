@@ -21,7 +21,8 @@ async function fetchCSV() {
 function parseCSV(dataString) {
     const rows = dataString.split('\n').slice(1); // Remove header row
     data = rows.map(row => {
-        const columns = row.split(',');
+        // Use regex to split row properly, handling commas within quotes
+        const columns = row.match(/(?:[^,"']+|"[^"]*"|'[^']*')+/g).map(col => col.replace(/(^"|"$|'|')/g, '')); // Remove surrounding quotes
         return {
             rowNumber: columns[0],
             name: columns[1],
@@ -34,7 +35,7 @@ function parseCSV(dataString) {
             link: columns[8],
             lastUpdated: columns[9],
         };
-    });
+    }).filter(row => row.name); // Filter out any empty rows
     setCachedData(data); // Store parsed data in cache
     loadRows(); // Load first rows after parsing
 }
