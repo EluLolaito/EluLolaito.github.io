@@ -1,0 +1,91 @@
+body {
+    font-size: 14px; /* Smaller font size for mobile */
+}
+
+header{
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.container {
+    margin-top: 0px;  
+    padding: 0 5%; /* Adjust padding for mobile */
+}
+
+.nav-list {
+    flex-direction: column; /* Stack navigation items vertically */
+    align-items: center; /* Center align items */
+}
+
+.nav-list a {
+    padding: 10px 20px; /* Adjust padding for links */
+    font-size: 14px; /* Adjust font size */
+}
+
+.search-bar {
+    margin: 10px 0; /* Adjust margins */
+    text-align: center; /* Center align search bar */
+}
+
+.search-bar input {
+    width: 100%; /* Full width for input */
+    max-width: none; /* Remove max-width constraint */
+    font-size: 14px; /* Adjust font size */
+}
+
+.table-container {
+    margin-top: 10px; /* Reduce margin to bring it closer to the search bar */
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+table {
+    font-size: 12px; /* Smaller font size in tables */
+}
+
+th, td {
+    padding: 8px; /* Adjust padding */
+    text-align: center; /* Center text in table cells */
+}
+
+.video-embed {
+    padding-bottom: 75%; /* Maintain aspect ratio */
+}
+
+.pagination {
+    flex-direction: column; /* Stack pagination buttons */
+    align-items: center; /* Center align buttons */
+}
+
+.pagination button {
+    margin: 5px 0; /* Adjust margins */
+}
+
+/* Responsive styles for the table */
+@media (max-width: 768px) {
+    .nav-list {
+        display: none; /* Hide the entire navigation list */
+    }
+
+    /* Hide the first column */
+    .table-container th:nth-child(1),
+    .table-container td:nth-child(1) {
+        display: none; /* Hide the first column */
+    }
+
+    /* Set widths for Name and Author columns */
+    .table-container th:nth-child(2),
+    .table-container td:nth-child(2) {
+        width: 60%; /* Name column */
+    }
+
+    .table-container th:nth-child(3),
+    .table-container td:nth-child(3) {
+        width: 40%; /* Author column */
+    }
+
+    /* Ensure other columns are hidden */
+    .table-container th:nth-child(n+4),
+    .table-container td:nth-child(n+4) {
+        display: none; /* Hide all columns from the 4th onwards */
+    }
+}
