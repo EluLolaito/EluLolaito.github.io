@@ -7,7 +7,7 @@
     --button_link_color: #ebdbb2;
     --button_bg_hover_color: #ff2c21;
     --button_fg_hover_color: #000;
-    --block_color_default: #333;
+    --block_color_default: #26261B;
 }
 
 ::selection {
@@ -92,7 +92,7 @@ nav {
 }
 
 .nav-list a {
-    background-color: #333;
+    background-color: var(--block_color_default);
     color: var(--button_link_color);
     padding: 12px 25px;
     font-size: 16px;
@@ -320,8 +320,8 @@ button {
 .pagination button {
     padding: 12px 24px;
     margin: 0 5px;
-    border: 0px solid #333;
-    background-color: #333;
+    border: 0px solid var(--block_color_default);
+    background-color: var(--block_color_default);
     color: var(--text_color_default);
     cursor: pointer;
     border-radius: 5px;
