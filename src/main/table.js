@@ -84,27 +84,43 @@ function changePage(direction) {
 document.getElementById('nextPage').addEventListener('click', () => changePage('next'));
 document.getElementById('prevPage').addEventListener('click', () => changePage('prev'));
 
+
+function removeSpecialCharacters(str) {
+    str = str.replace(/[!@#$%^&*()_+=~|\\{}[\];:'"<>,.?\/-]/g, ' ');
+    return str.replace(/\s+/g, ' ');
+}
+
 // Function to remove diacritics from Vietnamese characters
 function removeDiacritics(str) {
     const diacriticsMap = {
         'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
         'ằ': 'a', 'ắ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
+        'ầ': 'a', 'ấ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
         'è': 'e', 'é': 'e', 'ẻ': 'e', 'ẽ': 'e', 'ẹ': 'e',
         'ề': 'e', 'ế': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
         'ì': 'i', 'í': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
         'ò': 'o', 'ó': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
         'ồ': 'o', 'ố': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
+        'ờ': 'o', 'ớ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
         'ù': 'u', 'ú': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
+        'ừ': 'u', 'ứ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
         'ỳ': 'y', 'ý': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y',
+        'ă': 'a', 'â': 'a', 'ê': 'e', 'ô': 'o', 'ơ': 'o',
+        'ư': 'u', 'Ư': 'U',
         'À': 'A', 'Á': 'A', 'Ả': 'A', 'Ã': 'A', 'Ạ': 'A',
         'Ằ': 'A', 'Ắ': 'A', 'Ẳ': 'A', 'Ẵ': 'A', 'Ặ': 'A',
+        'Ầ': 'A', 'Ấ': 'A', 'Ẩ': 'A', 'Ẫ': 'A', 'Ậ': 'A',
         'È': 'E', 'É': 'E', 'Ẻ': 'E', 'Ẽ': 'E', 'Ẹ': 'E',
         'Ề': 'E', 'Ế': 'E', 'Ể': 'E', 'Ễ': 'E', 'Ệ': 'E',
         'Ì': 'I', 'Í': 'I', 'Ỉ': 'I', 'Ĩ': 'I', 'Ị': 'I',
         'Ò': 'O', 'Ó': 'O', 'Ỏ': 'O', 'Õ': 'O', 'Ọ': 'O',
         'Ồ': 'O', 'Ố': 'O', 'Ổ': 'O', 'Ỗ': 'O', 'Ộ': 'O',
+        'Ờ': 'O', 'Ớ': 'O', 'Ở': 'O', 'Ỡ': 'O', 'Ợ': 'O',
         'Ù': 'U', 'Ú': 'U', 'Ủ': 'U', 'Ũ': 'U', 'Ụ': 'U',
-        'Ỳ': 'Y', 'Ý': 'Y', 'Ỷ': 'Y', 'Ỹ': 'Y', 'Ỵ': 'Y'
+        'Ừ': 'U', 'Ứ': 'U', 'Ử': 'U', 'Ữ': 'U', 'Ự': 'U',
+        'Ỳ': 'Y', 'Ý': 'Y', 'Ỷ': 'Y', 'Ỹ': 'Y', 'Ỵ': 'Y',
+        'Ă': 'A', 'Â': 'A', 'Ê': 'E', 'Ô': 'O', 'Ơ': 'O',
+        'đ': 'd', 'Đ': 'D'
     };
 
     return str.split('').map(char => diacriticsMap[char] || char).join('');
@@ -198,15 +214,15 @@ document.getElementById('searchInput').addEventListener('input', function() {
     const rows = document.querySelectorAll('#music-table-body tr');
 
     rows.forEach(row => {
-        const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-        const author = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+        const name = removeSpecialCharacters(row.querySelector('td:nth-child(2)').textContent.toLowerCase());
+        const author = removeSpecialCharacters(row.querySelector('td:nth-child(3)').textContent.toLowerCase());
 
         const normalizedName = removeDiacritics(name);
         const normalizedAuthor = removeDiacritics(author);
 
         // Convert Chinese name and author to Pinyin
-        const chineseName = convertToPinyin(name);
-        const chineseAuthor = convertToPinyin(author);
+        //const chineseName = convertToPinyin(name);
+        //const chineseAuthor = convertToPinyin(author);
         
         // Convert Korean name and author to Romaja
         const romajaName = convertToRomaja(name);
@@ -219,8 +235,8 @@ document.getElementById('searchInput').addEventListener('input', function() {
         // Check for matches
         const matches = normalizedName.includes(searchValue) ||
                         normalizedAuthor.includes(searchValue) ||
-                        chineseName.includes(searchValue) ||
-                        chineseAuthor.includes(searchValue) ||
+                        //chineseName.includes(searchValue) ||
+                        //chineseAuthor.includes(searchValue) ||
                         romajaName.includes(searchValue) ||
                         romajaAuthor.includes(searchValue) ||
                         romajiName.includes(searchValue) ||
