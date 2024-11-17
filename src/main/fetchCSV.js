@@ -19,23 +19,34 @@ async function fetchCSV() {
 
 // Function to parse CSV data
 function parseCSV(dataString) {
-    const rows = dataString.split('\n').slice(1); // Remove header row
+    // Split the CSV string into rows, remove the header (first row)
+    const rows = dataString.split('\n').slice(1); 
+
     data = rows.map(row => {
-        // Use regex to split row properly, handling commas within quotes
-        const columns = row.match(/(?:[^,"']+|"[^"]*"|'[^']*')+/g).map(col => col.replace(/(^"|"$|'|')/g, '')); // Remove surrounding quotes
-        return {
-            rowNumber: columns[0],
-            name: columns[1],
-            author: columns[2],
-            language: columns[3],
-            length: columns[4],
-            instrument: columns[5],
-            major: columns[6],
-            bpm: columns[7],
-            link: columns[8],
-            lastUpdated: columns[9],
-        };
-    }).filter(row => row.name); // Filter out any empty rows
-    setCachedData(data); // Store parsed data in cache
-    loadRows(); // Load first rows after parsing
+        // Use a regular expression to handle fields with both single and double quotes
+        const columns = row.match(/(?:[^,"']+|"(?:[^"]|\\")*"|'(?:[^']|\\')*')+/g)
+            .map(col => col.replace(/^['"]|['"]$/g, '')) // Remove surrounding quotes
+
+        // Ensure we have the correct number of columns
+        if (columns.length >= 10) {
+            return {
+                rowNumber: columns[0],
+                name: columns[1],
+                author: columns[2],
+                language: columns[3],
+                length: columns[4],
+                instrument: columns[5],
+                major: columns[6],
+                bpm: columns[7],
+                link: columns[8],
+                lastUpdated: columns[9],
+            };
+        }
+
+        // Return null for rows that don't have enough data (invalid rows)
+        return null;
+    }).filter(row => row !== null); // Filter out any null rows (those with missing data)
+
+    setCachedData(data); // Cache the parsed data
+    loadRows(); // Load the first set of rows
 }
