@@ -33,6 +33,9 @@ jobs:
       - name: Build Jekyll site
         run: JEKYLL_ENV=production bundle exec jekyll build
 
+      - name: Debug Jekyll Data
+        run: ls -l _data && cat _data/skysheets.csv
+
       - name: Remove CSV after build
         run: rm _data/skysheets.csv
 
