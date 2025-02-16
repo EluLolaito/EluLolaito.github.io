@@ -24,6 +24,10 @@ jobs:
       - name: Check CSV file
         run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
 
+      - name: Convert CSV to YAML
+        run: |
+          cat _data/skysheets.csv | tee _data/skysheets.yml
+
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
         with:
@@ -36,8 +40,8 @@ jobs:
       - name: Debug Jekyll Data
         run: ls -l _data && cat _data/skysheets.csv
 
-      # - name: Remove CSV after build
-      #   run: rm _data/skysheets.csv
+        # - name: Remove CSV after build
+        #   run: rm _data/skysheets.csv
 
         # - name: Deploy to GitHub Pages
         #   uses: JamesIves/github-pages-deploy-action@v4
