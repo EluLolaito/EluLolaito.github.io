@@ -1,0 +1,25 @@
+<h1>Song List</h1>
+<table>
+  <thead>
+    <tr>
+      <th>#</th><th>Title</th><th>Artist</th><th>Language</th><th>Duration</th>
+      <th>Instrument</th><th>Key</th><th>BPM</th><th>Size</th><th>Last Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song in site.data.skysheets %}
+    <tr>
+      <td>{{ forloop.index }}</td>
+      <td><a href="{{ song.url }}">{{ song.name }}</a></td>
+      <td>{{ song.author }}</td>
+      <td>{{ song.language }}</td>
+      <td>{{ song.length }}</td>
+      <td>{{ song.instrument }}</td>
+      <td>{{ song.pitch }}</td>
+      <td>{{ song.bpm }}</td>
+      <td>{{ song.size }}</td>
+      <td>{{ song.last_updated }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

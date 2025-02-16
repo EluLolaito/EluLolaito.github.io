@@ -1,0 +1,91 @@
+/* body { */
+/*     font-size: 14px; /1* Smaller font size for mobile *1/ */
+/* } */
+
+/* header{ */
+/*     padding-bottom: 5px; */
+/*     padding-top: 5px; */
+/* } */
+
+/* .container { */
+/*     margin-top: 0px; */  
+/*     padding: 0 5%; /1* Adjust padding for mobile *1/ */
+/* } */
+
+/* .nav-list { */
+/*     flex-direction: column; /1* Stack navigation items vertically *1/ */
+/*     align-items: center; /1* Center align items *1/ */
+/* } */
+
+/* .nav-list a { */
+/*     padding: 10px 20px; /1* Adjust padding for links *1/ */
+/*     font-size: 14px; /1* Adjust font size *1/ */
+/* } */
+
+/* .search-bar { */
+/*     margin: 0.2rem; /1* Adjust margins *1/ */
+/*     text-align: center; /1* Center align search bar *1/ */
+/* } */
+
+/* .search-bar input { */
+/*     width: 100%; /1* Full width for input *1/ */
+/*     max-width: none; /1* Remove max-width constraint *1/ */
+/*     font-size: 14px; /1* Adjust font size *1/ */
+/* } */
+
+/* .table-container { */
+/*     margin-top: 10px; /1* Reduce margin to bring it closer to the search bar *1/ */
+/*     overflow-x: auto; /1* Enable horizontal scrolling *1/ */
+/* } */
+
+/* table { */
+/*     font-size: 12px; /1* Smaller font size in tables *1/ */
+/* } */
+
+/* th, td { */
+/*     padding: 8px; /1* Adjust padding *1/ */
+/*     text-align: center; /1* Center text in table cells *1/ */
+/* } */
+
+/* .video-embed { */
+/*     padding-bottom: 75%; /1* Maintain aspect ratio *1/ */
+/* } */
+
+/* .pagination { */
+/*     flex-direction: column; /1* Stack pagination buttons *1/ */
+/*     align-items: center; /1* Center align buttons *1/ */
+/* } */
+
+/* .pagination button { */
+/*     margin: 5px 0; /1* Adjust margins *1/ */
+/* } */
+
+/* Responsive styles for the table */
+@media (max-width: 768px) {
+    .nav-list {
+        display: none; /* Hide the entire navigation list */
+    }
+
+    /* Hide the first column */
+    .table-container th:nth-child(1),
+    .table-container td:nth-child(1) {
+        display: none; /* Hide the first column */
+    }
+
+    /* Set widths for Name and Author columns */
+    .table-container th:nth-child(2),
+    .table-container td:nth-child(2) {
+        width: 60%; /* Name column */
+    }
+
+    .table-container th:nth-child(3),
+    .table-container td:nth-child(3) {
+        width: 40%; /* Author column */
+    }
+
+    /* Ensure other columns are hidden */
+    .table-container th:nth-child(n+4),
+    .table-container td:nth-child(n+4) {
+        display: none; /* Hide all columns from the 4th onwards */
+    }
+}
