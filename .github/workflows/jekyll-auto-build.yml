@@ -26,7 +26,7 @@ jobs:
 
       - name: Convert CSV to YAML
         run: |
-          cat _data/skysheets.csv | tee _data/skysheets.yml
+          cat _data/skysheets.csv | tee _data/skysheets_yml.yml
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
