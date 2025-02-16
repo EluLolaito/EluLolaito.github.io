@@ -4,7 +4,7 @@ layout: songs
 permalink: /songs/
 ---
 
-# Song List
+# Song list
 
 | # | Title | Artist | Language | Duration | Instrument | Key | BPM | Size | Last Updated |
 |---|-------|--------|----------|----------|------------|-----|-----|------|-------------|
