@@ -6,7 +6,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for song in site.data.skysheets %}
+        {% for song in site.data.skysheets_yml %}
         <tr>
             <td>{{ forloop.index }}</td>
             <td><a href="{{ song["URL"] }}">{{ song["Name"] }}</a></td>
@@ -22,10 +22,13 @@
         {% endfor %}
     </tbody>
 </table>
-<pre>{{ site.data.skysheets | inspect }}</pre>
-<pre>{{ site.data.skysheets[0] | keys | inspect }}</pre>
+<pre>{{ site.data.skysheets_yml | inspect }}</pre>
+<pre>{{ site.data.skysheets_yml[0] | keys | inspect }}</pre>
 <pre>
-{% for row in site.data.skysheets %}
+{% for row in site.data.skysheets_yml %}
   {{ row | inspect }}
 {% endfor %}
 </pre>
+{% for row in site.data.skysheets_yml limit:1 %}
+  <pre>{{ row | keys | inspect }}</pre>
+{% endfor %}
