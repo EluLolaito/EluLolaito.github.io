@@ -5,33 +5,36 @@ on:
     branches:
       - master
 
+env:
+  PAGES_REPO_NWO: EluLolaito/EluLolaito.github.io
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-      - name: Fetch CSV from Google Sheets
-        run: |
-          mkdir -p _data
-          curl -L "${{ secrets.CSV_URL }}" -o _data/skysheets.csv
+    - name: Fetch CSV from Google Sheets
+      run: |
+        mkdir -p _data
+        curl -L "${{ secrets.CSV_URL }}" -o _data/skysheets.csv
 
-      - name: Check CSV file
-        run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
+    - name: Check CSV file
+      run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
 
-      - name: Setup Ruby & Jekyll
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
+    - name: Setup Ruby & Jekyll
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
 
-      - name: Build Jekyll site
-        run: JEKYLL_ENV=production bundle exec jekyll build
+    - name: Build Jekyll site
+      run: JEKYLL_ENV=production bundle exec jekyll build
 
-      - name: Remove CSV after build
-        run: rm _data/skysheets.csv
+    - name: Remove CSV after build
+      run: rm _data/skysheets.csv
 
       # - name: Deploy to GitHub Pages
       #   uses: JamesIves/github-pages-deploy-action@v4
