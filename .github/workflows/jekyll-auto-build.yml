@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-on:
-  push:
-    branches:
-      - master
   repository_dispatch:
     types: [google-sheets-update]
 
