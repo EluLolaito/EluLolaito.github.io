@@ -23,8 +23,16 @@ jobs:
           mkdir -p _data
           curl -L "${{ secrets.CSV_URL }}" -o _data/skysheets.csv
 
+      - name: Fetch YML from Google Sheets
+        run: |
+          mkdir -p _data
+          curl -L "${{ secrets.YML_URL }}" -o _data/songs.yml
+
       - name: Check CSV file
         run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
+
+      - name: Check YML file
+        run: ls -l _data && cat _data/songs.yml || echo "YML file missing!"
 
       # - name: Convert CSV to YAML
       #   run: |
@@ -37,7 +45,7 @@ jobs:
           bundler-cache: true
 
       - name: Build Jekyll site
-        run: JEKYLL_ENV=production bundle exec jekyll build
+        run: JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
         run: ls -l _data && cat _data/skysheets.csv
