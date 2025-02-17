@@ -1,12 +1,19 @@
-<table>
+<table class="table-container">
     <thead>
         <tr>
-            <th>#</th><th>Title</th><th>Artist</th><th>Language</th><th>Duration</th>
-            <th>Instrument</th><th>Key</th><th>BPM</th><th>Size</th><th>Last Updated</th>
+            <th style="width: 5%">Ord.</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th style="width: 10%;">Language</th>
+            <th style="width: 7%;">Length</th>
+            <th style="width: 10%;">Instrument</th>
+            <th style="width: 6%;">Major</th>
+            <th style="width: 6%;">BPM</th>
+            <th style="width: 12%;">Last updated</th>
         </tr>
     </thead>
-    <tbody>
-        {% for song in site.data.skysheets_yml %}
+    <tbody id="music-table-body">
+        {% for song in site.data.skysheets %}
         <tr>
             <td>{{ forloop.index }}</td>
             <td><a href="{{ song["URL"] }}">{{ song["Name"] }}</a></td>
@@ -16,19 +23,19 @@
             <td>{{ song["Instrument"] }}</td>
             <td>{{ song["Major"] }}</td>
             <td>{{ song["BPM"] }}</td>
-            <td>{{ song["Size"] }}</td>
             <td>{{ song["Last updated"] }}</td>
         </tr>
         {% endfor %}
     </tbody>
+    <!-- <tfoot> -->
+    <!--     <tr> -->
+    <!--         Table footer -->
+    <!--     </tr> -->
+    <!-- </tfoot> -->
 </table>
-<pre>{{ site.data.skysheets_yml | inspect }}</pre>
-<pre>{{ site.data.skysheets_yml[0] | keys | inspect }}</pre>
-<pre>
-{% for row in site.data.skysheets_yml %}
-  {{ row | inspect }}
-{% endfor %}
-</pre>
-{% for row in site.data.skysheets_yml limit:1 %}
-  <pre>{{ row | keys | inspect }}</pre>
-{% endfor %}
+<div id="pagination" class="container row-container pagination">
+    <button id="prevPage" disabled>Previous</button>
+    <span id="pageInfo">Page </span>
+    <button id="nextPage">Next</button>
+</div>
+<div id="loading" class="loading" style="display: none;">Loading...</div>

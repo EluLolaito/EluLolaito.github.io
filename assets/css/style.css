@@ -323,12 +323,12 @@ main {
 
 /* Table styles */
 table {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     background-color: transparent;
     /*border: 3px solid var(--text-color);*/
     table-layout: fixed;
-    max-width: 90%;
+    max-width: 100%;
     overflow: auto;
 }
 
@@ -443,12 +443,12 @@ button {
 /* Pagination styles */
 .pagination {
     justify-content: center;
-    text-align: center;
-    margin-top: 20px;
     align-items: center;
+    border-color: var(--border-color);
     border-top: dashed;
     border-width: 0.2rem;
-    border-color: var(--border-color);
+    margin-top: 20px;
+    text-align: center;
 }
 
 .pagination button:hover,
@@ -581,7 +581,6 @@ footer {
     align-items: center;
     padding: 0.2rem;
     position: relative;
-    bottom: 0;
     width: 100%;
 }
 

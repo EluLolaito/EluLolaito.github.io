@@ -1,7 +1,7 @@
 ---
 title: "Song List"
 layout: default
-permalink: /songs/
+permalink: /songs
 ---
 
 # Song list
