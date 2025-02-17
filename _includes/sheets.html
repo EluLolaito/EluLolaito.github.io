@@ -27,11 +27,6 @@
         </tr>
         {% endfor %}
     </tbody>
-    <!-- <tfoot> -->
-    <!--     <tr> -->
-    <!--         Table footer -->
-    <!--     </tr> -->
-    <!-- </tfoot> -->
 </table>
 <div id="pagination" class="container row-container pagination">
     <button id="prevPage" disabled>Previous</button>
@@ -39,3 +34,4 @@
     <button id="nextPage">Next</button>
 </div>
 <div id="loading" class="loading" style="display: none;">Loading...</div>
+<pre>{{ site.data | inspect }}</pre>

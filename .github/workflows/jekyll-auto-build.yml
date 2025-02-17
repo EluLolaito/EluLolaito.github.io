@@ -8,6 +8,11 @@ on:
 env:
   PAGES_REPO_NWO: EluLolaito/EluLolaito.github.io
 
+
+on:
+  repository_dispatch:
+    types: [google-sheets-update]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,9 +29,9 @@ jobs:
       - name: Check CSV file
         run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
 
-      - name: Convert CSV to YAML
-        run: |
-          cat _data/skysheets.csv | tee _data/skysheets_yml.yml
+      # - name: Convert CSV to YAML
+      #   run: |
+      #     cat _data/skysheets.csv | tee _data/skysheets_yml.yml
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
@@ -40,10 +45,10 @@ jobs:
       - name: Debug Jekyll Data
         run: ls -l _data && cat _data/skysheets.csv
 
-      - name: Debug YAML file
-        run: |
-          echo "===== Checking _data/skysheets.yml ====="
-          cat _data/skysheets_yml.yml || echo "YAML file missing!"
+      # - name: Debug YAML file
+      #   run: |
+      #     echo "===== Checking _data/skysheets.yml ====="
+      #     cat _data/skysheets_yml.yml || echo "YAML file missing!"
 
         # - name: Remove CSV after build
         #   run: rm _data/skysheets.csv
