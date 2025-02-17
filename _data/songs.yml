@@ -1,0 +1,11 @@
+- name: "Song A"
+  author: "Artist 1"
+  language: "English"
+  length: "3:45"
+  bpm: 120
+
+- name: "Song B"
+  author: "Artist 2"
+  language: "English"
+  length: "4:12"
+  bpm: 110
