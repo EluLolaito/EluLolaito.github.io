@@ -5,13 +5,15 @@ on:
     branches:
       - master
 
-env:
-  PAGES_REPO_NWO: EluLolaito/EluLolaito.github.io
-
-
 on:
+  push:
+    branches:
+      - master
   repository_dispatch:
     types: [google-sheets-update]
+
+env:
+  PAGES_REPO_NWO: EluLolaito/EluLolaito.github.io
 
 jobs:
   build:
