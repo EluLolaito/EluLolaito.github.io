@@ -34,4 +34,11 @@
     <button id="nextPage">Next</button>
 </div>
 <div id="loading" class="loading" style="display: none;">Loading...</div>
-<pre>{{ site.data | inspect }}</pre>
+<!-- <pre>{{ site.data | inspect }}</pre> -->
+
+{% assign rows = site.data.skysheets %}
+<ul>
+  {% for row in rows %}
+    <li>{{ row.Name }} - {{ row.Author }}</li>
+  {% endfor %}
+</ul>
