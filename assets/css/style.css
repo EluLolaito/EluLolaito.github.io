@@ -21,16 +21,16 @@
 
     --dock-bg-color: #252222;
 
-    --link-color: #da251d;
+    --link-color: #f1605a;
     --link-hover-color: #ff2c21;
     --link-active-color: #1a5e2e;
     --link-visited-color: #8e44ad;
 
     --button-bg-color: #252222;
     --button-text-color: #ebdbb2;
-    --button-hover-bg-color: #ff2c21;
+    --button-hover-bg-color: #f1605a;
     --button-hover-text-color: #000;
-    --button-active-bg-color: #991B14;
+    --button-active-bg-color: #f1605a;
 
     --border-color: #991B14;
     --border-focus: #ebdbb2;
@@ -129,6 +129,7 @@ canvas {
 
 a {
     color: var(--link-color);
+    text-decoration: none;
 }
 
 a:hover {
