@@ -343,6 +343,7 @@ th, td {
     overflow-wrap: break-word;
     white-space: normal;
     border-collapse: collapse;
+    background-color: var(--dock-bg-color);
 }
 th {
     text-align: center;
@@ -352,7 +353,6 @@ th {
 td {
     text-align: center;
     border: 0.4rem solid var(--background-color);
-    background-color: var(--dock-bg-color);
     z-index: 0;
 }
 table tr td:nth-child(2) {

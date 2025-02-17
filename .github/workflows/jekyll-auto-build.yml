@@ -28,6 +28,16 @@ jobs:
           mkdir -p _data
           curl -L "${{ secrets.YML_URL }}" -o _data/songs.yml
 
+      - name: Check if _data folder exists and list its contents
+        run: |
+          echo "Checking if _data folder exists..."
+          if [ -d "_data" ]; then
+            echo "_data folder exists"
+            ls -l _data
+          else
+            echo "_data folder does not exist"
+          fi
+
       - name: Check CSV file
         run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
 
@@ -48,7 +58,10 @@ jobs:
         run: JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
-        run: ls -l _data && cat _data/skysheets.csv
+        run: |
+          echo "Checking _data folder after build..."
+          ls -l _data
+          cat _data/skysheets.csv
 
       # - name: Debug YAML file
       #   run: |
