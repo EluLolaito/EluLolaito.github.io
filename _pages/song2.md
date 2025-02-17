@@ -6,7 +6,7 @@ permalink: /song2
 
 ## CSV Data Test
 
-<table>
+<table class="table-container">
   <tr>
     <th>Name</th>
     <th>Author</th>

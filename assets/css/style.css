@@ -324,12 +324,12 @@ main {
 /* Table styles */
 table {
     width: 100%;
-    border-collapse: collapse;
     background-color: transparent;
     /*border: 3px solid var(--text-color);*/
     table-layout: fixed;
     max-width: 100%;
     overflow: auto;
+    border-spacing: 0.4rem;
 }
 
 thead {
@@ -338,7 +338,7 @@ thead {
 }
 
 th, td {
-    padding: 0.4rem;
+    padding: 0.3rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -352,7 +352,6 @@ th {
 }
 td {
     text-align: center;
-    border: 0.4rem solid var(--background-color);
     z-index: 0;
 }
 table tr td:nth-child(2) {
@@ -444,10 +443,8 @@ button {
 .pagination {
     justify-content: center;
     align-items: center;
-    border-color: var(--border-color);
-    border-top: dashed;
-    border-width: 0.2rem;
-    margin-top: 20px;
+    border-top: 0.1rem dashed var(--border-color);
+    margin-top: 0.1rem;
     text-align: center;
 }
 
@@ -582,6 +579,7 @@ footer {
     padding: 0.2rem;
     position: relative;
     width: 100%;
+    border-top: 0.2rem dashed var(--border-color);
 }
 
 /* Chrome, Edge, Safari */
