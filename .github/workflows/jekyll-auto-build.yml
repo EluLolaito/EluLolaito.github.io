@@ -39,7 +39,6 @@ jobs:
       #     cat ./_data/skysheets.csv || echo "CSV file missing!"
       #     cat ./_data/songs.yml || echo "YML file missing!"
 
-
       - name: Fetch CSV from Google Sheets
         run: |
           mkdir -p /tmp/.jekyll_data
