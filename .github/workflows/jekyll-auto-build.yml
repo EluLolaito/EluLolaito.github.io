@@ -65,8 +65,8 @@ jobs:
           cat ./_data/songs.yml
           ls ./_site
 
-      - name: Secure: Remove _data After Build
-        run: rm -rf _data  # Prevent data leakage
+      - name: Remove _data After Build
+        run: rm -rf _data
 
       - name: Deploy to GitHub Pages
         uses: actions/upload-pages-artifact@v1
