@@ -18,33 +18,43 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # - name: Fetch CSV from Google Sheets
+      #   run: |
+      #     # mkdir -p ./_data
+      #     curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
+
+      # - name: Fetch YML from Google Sheets
+      #   run: |
+      #     pwd
+      #     # ls
+      #     # mkdir -p ./_data
+      #     ls
+      #     curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
+
+      # # Step to verify that CSV/YML files were fetched correctly
+      # - name: Check fetched files
+      #   run: |
+      #     echo "Checking files in _data..."
+      #     ls -l ./_data
+      #     cat ./_data/skysheets.csv || echo "CSV file missing!"
+      #     cat ./_data/songs.yml || echo "YML file missing!"
+
+
       - name: Fetch CSV from Google Sheets
         run: |
-          # mkdir -p ./_data
-          curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
+          mkdir -p /tmp/.jekyll_data
+          curl -L "${{ secrets.CSV_URL }}" -o /tmp/.jekyll_data/skysheets.csv
 
       - name: Fetch YML from Google Sheets
         run: |
-          pwd
-          # ls
-          # mkdir -p ./_data
-          ls
-          curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
+          mkdir -p /tmp/.jekyll_data
+          curl -L "${{ secrets.YML_URL }}" -o /tmp/.jekyll_data/songs.yml
 
-      # Step to verify that CSV/YML files were fetched correctly
-      - name: Check fetched files
+      - name: Link Data Folder
         run: |
-          echo "Checking files in _data..."
-          ls -l ./_data
-          cat ./_data/skysheets.csv || echo "CSV file missing!"
-          cat ./_data/songs.yml || echo "YML file missing!"
+          ln -s /tmp/.jekyll_data _data
+          ls -l _data  # Debug: Check if symlink works
 
-      - name: Move Data and Link
-        run: |
-          mkdir -p .jekyll_data
-          mv _data/skysheets.csv .jekyll_data/skysheets.csv
-          mv _data/songs.yml .jekyll_data/songs.yml
-          ln -s $(pwd)/.jekyll_data _data
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
