@@ -41,18 +41,14 @@ jobs:
 
       - name: Fetch CSV from Google Sheets
         run: |
-          mkdir -p /tmp/.jekyll_data
-          curl -L "${{ secrets.CSV_URL }}" -o /tmp/.jekyll_data/skysheets.csv
+          curl -L "${{ secrets.CSV_URL }}" -o /tmp/skysheets.csv
+          export SKY_DATA="$(cat /tmp/skysheets.csv | base64 -w 0)"
+          echo "SKY_DATA=$SKY_DATA" >> $GITHUB_ENV
 
       - name: Fetch YML from Google Sheets
-        run: |
-          mkdir -p /tmp/.jekyll_data
-          curl -L "${{ secrets.YML_URL }}" -o /tmp/.jekyll_data/songs.yml
-
-      - name: Link Data Folder
-        run: |
-          ln -s /tmp/.jekyll_data _data
-          ls -l _data  # Debug: Check if symlink works
+        run: | curl -L "${{ secrets.YML_URL }}" -o /tmp/songs.yml
+        export SONGS_DATA="$(cat /tmp/songs.yml | base64 -w 0)"
+        echo "SONGS_DATA=$SONGS_DATA" >> $GITHUB_ENV
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
@@ -63,28 +59,17 @@ jobs:
       # Build Jekyll site and force it to use updated data
       - name: Build Jekyll site
         run: |
-          echo "Creating _data folder in the current directory..."
           pwd
-          # JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
-          touch ./_data/skysheets.csv ./_data/songs.yml
-          # bundle exec jekyll clean  # Clears any cached build data
           JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
         run: |
-          echo "Checking _data folder after build..."
           pwd
           ls
-          ls -l ./_data
+          # ls -l ./_data
           # cat ./_data/skysheets.csv
-          cat ./_data/songs.yml
-          ls ./_site
-
-      - name: Remove _data After Build
-        run: rm -rf _data
-
-        # - name: Remove CSV after build
-        #   run: rm _data/skysheets.csv
+          # cat ./_data/songs.yml
+          # ls ./_site
 
         # - name: Deploy to GitHub Pages
         #   uses: JamesIves/github-pages-deploy-action@v4
