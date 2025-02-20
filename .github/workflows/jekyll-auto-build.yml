@@ -25,6 +25,8 @@ jobs:
 
       - name: Fetch YML from Google Sheets
         run: |
+          pwd
+          ls
           mkdir -p ./_data
           curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
 
