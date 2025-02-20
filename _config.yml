@@ -38,6 +38,7 @@ safe: false
 include:
   - assets/html
   - _pages
+  - _data
 
 defaults:
   - scope:
