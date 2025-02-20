@@ -46,9 +46,10 @@ jobs:
           echo "SKY_DATA=$SKY_DATA" >> $GITHUB_ENV
 
       - name: Fetch YML from Google Sheets
-        run: | curl -L "${{ secrets.YML_URL }}" -o /tmp/songs.yml
-        export SONGS_DATA="$(cat /tmp/songs.yml | base64 -w 0)"
-        echo "SONGS_DATA=$SONGS_DATA" >> $GITHUB_ENV
+        run: |
+          curl -L "${{ secrets.YML_URL }}" -o /tmp/songs.yml
+          export SONGS_DATA="$(cat /tmp/songs.yml | base64 -w 0)"
+          echo "SONGS_DATA=$SONGS_DATA" >> $GITHUB_ENV
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
