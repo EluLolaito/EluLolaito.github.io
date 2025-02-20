@@ -20,33 +20,21 @@ jobs:
 
       - name: Fetch CSV from Google Sheets
         run: |
-          mkdir -p _data
-          curl -L "${{ secrets.CSV_URL }}" -o _data/skysheets.csv
+          mkdir -p ./_data
+          curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
 
       - name: Fetch YML from Google Sheets
         run: |
-          mkdir -p _data
-          curl -L "${{ secrets.YML_URL }}" -o _data/songs.yml
+          mkdir -p ./_data
+          curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
 
-      - name: Check if _data folder exists and list its contents
+      # Step to verify that CSV/YML files were fetched correctly
+      - name: Check fetched files
         run: |
-          echo "Checking if _data folder exists..."
-          if [ -d "_data" ]; then
-            echo "_data folder exists"
-            ls -l _data
-          else
-            echo "_data folder does not exist"
-          fi
-
-      - name: Check CSV file
-        run: ls -l _data && cat _data/skysheets.csv || echo "CSV file missing!"
-
-      - name: Check YML file
-        run: ls -l _data && cat _data/songs.yml || echo "YML file missing!"
-
-      # - name: Convert CSV to YAML
-      #   run: |
-      #     cat _data/skysheets.csv | tee _data/skysheets_yml.yml
+          echo "Checking files in _data..."
+          ls -l ./_data
+          cat ./_data/skysheets.csv || echo "CSV file missing!"
+          cat ./_data/songs.yml || echo "YML file missing!"
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
@@ -54,19 +42,23 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
+      # Build Jekyll site
       - name: Build Jekyll site
-        run: JEKYLL_ENV=production bundle exec jekyll build --verbose
+        run: |
+          echo "Creating _data folder in the current directory..."
+          mkdir -p ./_data  # Ensures the _data folder exists in the build directory
+          JEKYLL_ENV=production bundle exec jekyll build --verbose
+
+      # - name: Build Jekyll site
+      #   run: JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
         run: |
           echo "Checking _data folder after build..."
           ls -l _data
-          cat _data/skysheets.csv
+          ls -l ./_data
+          cat ./_data/skysheets.csv
 
-      # - name: Debug YAML file
-      #   run: |
-      #     echo "===== Checking _data/skysheets.yml ====="
-      #     cat _data/skysheets_yml.yml || echo "YAML file missing!"
 
         # - name: Remove CSV after build
         #   run: rm _data/skysheets.csv
