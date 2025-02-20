@@ -42,12 +42,12 @@ jobs:
       #     cat ./_data/songs.yml || echo "YML file missing!"
 
       - name: Fetch Data and Store in ENV
-          run: |
-            echo "Fetching data..."
-            SONGS_DATA=$(curl -sL "${{ secrets.YML_URL }}")
-            echo "SONGS_DATA<<EOF" >> $GITHUB_ENV
-            echo "$SONGS_DATA" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
+        run: |
+          echo "Fetching data..."
+          SONGS_DATA=$(curl -sL "${{ secrets.YML_URL }}")
+          echo "SONGS_DATA<<EOF" >> $GITHUB_ENV
+          echo "$SONGS_DATA" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
