@@ -39,6 +39,13 @@ jobs:
           cat ./_data/skysheets.csv || echo "CSV file missing!"
           cat ./_data/songs.yml || echo "YML file missing!"
 
+      - name: Move Data and Link
+        run: |
+          mkdir -p .jekyll_data
+          mv _data/skysheets.csv .jekyll_data/skysheets.csv
+          mv _data/songs.yml .jekyll_data/songs.yml
+          ln -s $(pwd)/.jekyll_data _data
+
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
         with:
@@ -52,7 +59,7 @@ jobs:
           pwd
           # JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
           touch ./_data/skysheets.csv ./_data/songs.yml
-          bundle exec jekyll clean  # Clears any cached build data
+          # bundle exec jekyll clean  # Clears any cached build data
           JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
