@@ -47,7 +47,8 @@ jobs:
         run: |
           echo "Creating _data folder in the current directory..."
           mkdir -p ./_data  # Ensures the _data folder exists in the build directory
-          JEKYLL_ENV=production bundle exec jekyll build --verbose
+          JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
+          # JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       # - name: Build Jekyll site
       #   run: JEKYLL_ENV=production bundle exec jekyll build --verbose
