@@ -25,7 +25,7 @@ jobs:
 
       - name: Fetch YML from Google Sheets
         run: |
-          mkdir -p ./_data
+          # mkdir -p ./_data
           curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
 
       # Step to verify that CSV/YML files were fetched correctly
@@ -47,9 +47,9 @@ jobs:
         run: |
           echo "Creating _data folder in the current directory..."
           pwd
-          mkdir -p ./_data  # Ensures the _data folder exists in the build directory
-          JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
-          # JEKYLL_ENV=production bundle exec jekyll build --verbose
+          # mkdir -p ./_data  # Ensures the _data folder exists in the build directory
+          # JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
+          JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       # - name: Build Jekyll site
       #   run: JEKYLL_ENV=production bundle exec jekyll build --verbose
@@ -57,7 +57,7 @@ jobs:
       - name: Debug Jekyll Data
         run: |
           echo "Checking _data folder after build..."
-          ls -l _data
+          pwd
           ls -l ./_data
           # cat ./_data/skysheets.csv
           cat ./_data/songs.yml
