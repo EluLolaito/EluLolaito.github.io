@@ -51,7 +51,7 @@ jobs:
           echo "Creating _data folder in the current directory..."
           pwd
           # JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
-          touch ./data/skysheets.csv ./data/songs.yml
+          touch ./_data/skysheets.csv ./_data/songs.yml
           bundle exec jekyll clean  # Clears any cached build data
           JEKYLL_ENV=production bundle exec jekyll build --verbose
 
