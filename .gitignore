@@ -1,4 +1,5 @@
-_site
+_site/
+_data/
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
@@ -10,7 +11,6 @@ Gemfile.lock
 .github/*.bak
 secrets.env
 .env
-_data/*.csv
 .DS_Store
 Thumbs.db
 *.swp

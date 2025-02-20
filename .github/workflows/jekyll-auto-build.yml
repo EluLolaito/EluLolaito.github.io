@@ -61,6 +61,7 @@ jobs:
         run: |
           echo "Checking _data folder after build..."
           pwd
+          ls
           ls -l ./_data
           # cat ./_data/skysheets.csv
           cat ./_data/songs.yml
