@@ -18,10 +18,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Fetch CSV from Google Sheets
-        run: |
-          mkdir -p ./_data
-          curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
+      # - name: Fetch CSV from Google Sheets
+      #   run: |
+      #     mkdir -p ./_data
+      #     curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
 
       - name: Fetch YML from Google Sheets
         run: |
@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "Checking files in _data..."
           ls -l ./_data
-          cat ./_data/skysheets.csv || echo "CSV file missing!"
+          # cat ./_data/skysheets.csv || echo "CSV file missing!"
           cat ./_data/songs.yml || echo "YML file missing!"
 
       - name: Setup Ruby & Jekyll
@@ -58,7 +58,8 @@ jobs:
           echo "Checking _data folder after build..."
           ls -l _data
           ls -l ./_data
-          cat ./_data/skysheets.csv
+          # cat ./_data/skysheets.csv
+          cat ./_data/songs.yml
 
 
         # - name: Remove CSV after build
