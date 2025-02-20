@@ -18,8 +18,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # - name: Fetch CSV from Google Sheets
-      #   run: |
+      - name: Fetch CSV from Google Sheets
+        run: |
       #     mkdir -p ./_data
           curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
 
