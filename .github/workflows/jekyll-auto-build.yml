@@ -41,10 +41,13 @@ jobs:
       #     cat ./_data/skysheets.csv || echo "CSV file missing!"
       #     cat ./_data/songs.yml || echo "YML file missing!"
 
-      - name: Fetch CSV and YAML into Environment Variables
-        run: |
-          echo "CSV_DATA=$(curl -s $CSV_URL | base64 -w 0)" >> $GITHUB_ENV
-          echo "YAML_DATA=$(curl -s $YAML_URL | base64 -w 0)" >> $GITHUB_ENV
+      - name: Fetch Data and Store in ENV
+          run: |
+            echo "Fetching data..."
+            SONGS_DATA=$(curl -sL "${{ secrets.YML_URL }}")
+            echo "SONGS_DATA<<EOF" >> $GITHUB_ENV
+            echo "$SONGS_DATA" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
@@ -52,11 +55,15 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      # Build Jekyll site and force it to use updated data
-      - name: Build Jekyll site
-        run: |
-          pwd
-          JEKYLL_ENV=production bundle exec jekyll build --verbose
+      # # Build Jekyll site and force it to use updated data
+      # - name: Build Jekyll site
+      #   run: |
+      #     pwd
+      #     JEKYLL_ENV=production bundle exec jekyll build --verbose
+
+
+      - name: Build Jekyll Site with ENV
+        run: JEKYLL_ENV=production SONGS_DATA="$SONGS_DATA" bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
         run: |
