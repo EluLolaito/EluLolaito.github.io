@@ -15,6 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Fetch YML from Google Sheets
+        run: |
+          pwd
+          ls
+          mkdir -p ./_data
+          curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
+
       - name: Checkout repo
         uses: actions/checkout@v4
 
@@ -22,13 +29,6 @@ jobs:
       #   run: |
       #     mkdir -p ./_data
       #     curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
-
-      - name: Fetch YML from Google Sheets
-        run: |
-          pwd
-          ls
-          mkdir -p ./_data
-          curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
 
       # Step to verify that CSV/YML files were fetched correctly
       - name: Check fetched files
