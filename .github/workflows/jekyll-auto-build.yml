@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1  # Only get the latest commit (faster)
 
       # - name: Fetch CSV from Google Sheets
       #   run: |
@@ -39,16 +41,10 @@ jobs:
       #     cat ./_data/skysheets.csv || echo "CSV file missing!"
       #     cat ./_data/songs.yml || echo "YML file missing!"
 
-
-      - name: Fetch CSV and YAML
+      - name: Fetch CSV and YAML into Environment Variables
         run: |
-          echo "SKY_DATA=$(curl -s $CSV_URL | base64 -w 0)" >> $GITHUB_ENV
-          echo "SONGS_DATA=$(curl -s $YAML_URL | base64 -w 0)" >> $GITHUB_ENV
-
-      - name: Debug Environment Variables
-        run: |
-          echo "CSV Length: $(echo ${{ env.SKY_DATA }} | wc -c)"
-          echo "YAML Length: $(echo ${{ env.SONGS_DATA }} | wc -c)"
+          echo "CSV_DATA=$(curl -s $CSV_URL | base64 -w 0)" >> $GITHUB_ENV
+          echo "YAML_DATA=$(curl -s $YAML_URL | base64 -w 0)" >> $GITHUB_ENV
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
