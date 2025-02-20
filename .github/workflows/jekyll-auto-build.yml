@@ -68,11 +68,6 @@ jobs:
       - name: Remove _data After Build
         run: rm -rf _data
 
-      - name: Deploy to GitHub Pages
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: _site
-
         # - name: Remove CSV after build
         #   run: rm _data/skysheets.csv
 
