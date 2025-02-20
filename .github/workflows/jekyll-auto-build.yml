@@ -55,7 +55,6 @@ jobs:
           ln -s /tmp/.jekyll_data _data
           ls -l _data  # Debug: Check if symlink works
 
-
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
         with:
