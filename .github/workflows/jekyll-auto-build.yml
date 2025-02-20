@@ -45,17 +45,15 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      # Build Jekyll site
+      # Build Jekyll site and force it to use updated data
       - name: Build Jekyll site
         run: |
           echo "Creating _data folder in the current directory..."
           pwd
-          # mkdir -p ./_data  # Ensures the _data folder exists in the build directory
           # JEKYLL_ENV=production bundle exec jekyll build --source ./ --verbose
+          touch ./data/skysheets.csv ./data/songs.yml
+          bundle exec jekyll clean  # Clears any cached build data
           JEKYLL_ENV=production bundle exec jekyll build --verbose
-
-      # - name: Build Jekyll site
-      #   run: JEKYLL_ENV=production bundle exec jekyll build --verbose
 
       - name: Debug Jekyll Data
         run: |
@@ -67,6 +65,13 @@ jobs:
           cat ./_data/songs.yml
           ls ./_site
 
+      - name: Secure: Remove _data After Build
+        run: rm -rf _data  # Prevent data leakage
+
+      - name: Deploy to GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: _site
 
         # - name: Remove CSV after build
         #   run: rm _data/skysheets.csv
