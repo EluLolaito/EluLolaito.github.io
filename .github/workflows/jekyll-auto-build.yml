@@ -39,17 +39,16 @@ jobs:
       #     cat ./_data/skysheets.csv || echo "CSV file missing!"
       #     cat ./_data/songs.yml || echo "YML file missing!"
 
-      - name: Fetch CSV from Google Sheets
-        run: |
-          curl -L "${{ secrets.CSV_URL }}" -o /tmp/skysheets.csv
-          export SKY_DATA="$(cat /tmp/skysheets.csv | base64 -w 0)"
-          echo "SKY_DATA=$SKY_DATA" >> $GITHUB_ENV
 
-      - name: Fetch YML from Google Sheets
+      - name: Fetch CSV and YAML
         run: |
-          curl -L "${{ secrets.YML_URL }}" -o /tmp/songs.yml
-          export SONGS_DATA="$(cat /tmp/songs.yml | base64 -w 0)"
-          echo "SONGS_DATA=$SONGS_DATA" >> $GITHUB_ENV
+          echo "SKY_DATA=$(curl -s $CSV_URL | base64 -w 0)" >> $GITHUB_ENV
+          echo "SONGS_DATA=$(curl -s $YAML_URL | base64 -w 0)" >> $GITHUB_ENV
+
+      - name: Debug Environment Variables
+        run: |
+          echo "CSV Length: $(echo ${{ env.SKY_DATA }} | wc -c)"
+          echo "YAML Length: $(echo ${{ env.SONGS_DATA }} | wc -c)"
 
       - name: Setup Ruby & Jekyll
         uses: ruby/setup-ruby@v1
