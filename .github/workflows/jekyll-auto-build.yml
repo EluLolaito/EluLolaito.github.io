@@ -21,13 +21,13 @@ jobs:
       # - name: Fetch CSV from Google Sheets
       #   run: |
       #     mkdir -p ./_data
-      #     curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
+          curl -L "${{ secrets.CSV_URL }}" -o ./_data/skysheets.csv
 
       - name: Fetch YML from Google Sheets
         run: |
           pwd
-          ls
-          mkdir -p ./_data
+          # ls
+          # mkdir -p ./_data
           ls
           curl -L "${{ secrets.YML_URL }}" -o ./_data/songs.yml
 
@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "Checking files in _data..."
           ls -l ./_data
-          # cat ./_data/skysheets.csv || echo "CSV file missing!"
+          cat ./_data/skysheets.csv || echo "CSV file missing!"
           cat ./_data/songs.yml || echo "YML file missing!"
 
       - name: Setup Ruby & Jekyll
