@@ -66,6 +66,7 @@ jobs:
           # cat ./_data/skysheets.csv
           cat ./_data/songs.yml
           ls ./_site
+          ls ./_site/_data
 
 
         # - name: Remove CSV after build
