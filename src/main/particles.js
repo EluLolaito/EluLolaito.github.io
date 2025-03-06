@@ -84,7 +84,7 @@
         target.x = posx - window.scrollX;
         target.y = posy - window.scrollY;
         // Update the position of coordinates div
-        showCoordinates(posx, posy);
+        // showCoordinates(posx, posy);
     }
 
     function scrollCheck() {
@@ -179,10 +179,10 @@
     }
 
     // ...
-    function showCoordinates(x, y) {
-        var coordinates = document.getElementById('coordinates');
-        coordinates.style.left = (x + 10) + 'px';
-        coordinates.style.top = (y + 10) + 'px';
-        coordinates.innerHTML = `X: ${x}, Y: ${y}`;
-    }
+    // function showCoordinates(x, y) {
+    //     var coordinates = document.getElementById('coordinates');
+    //     coordinates.style.left = (x + 10) + 'px';
+    //     coordinates.style.top = (y + 10) + 'px';
+    //     coordinates.innerHTML = `X: ${x}, Y: ${y}`;
+    // }
 })();
