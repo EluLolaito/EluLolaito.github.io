@@ -7,13 +7,9 @@ permalink: /song2
 ## CSV Data Test
 
 <ul>
-{% for song in site.data.songs %}
-  <li>
-    <a href="https://github.com/{{ song.author }}">
-      {{ song.name }}
-    </a>
-  </li>
-{% endfor %}
+  {% for song in site.data.songs %}
+    <li>{{ song.name }} by {{ song.author }}</li>
+  {% endfor %}
 </ul>
 
 <pre>{{ site.data.songs | inspect }}</pre>

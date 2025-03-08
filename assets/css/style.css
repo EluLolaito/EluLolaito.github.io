@@ -8,12 +8,13 @@
 }
 :root {
     --font-default: 'Alata', sans-serif;
-    --scrollbar-color: #991B14;
-    --scrollbar-hover-color: #ebdbb2;
 }
 
-:root {
+[data-theme="dark"] {
     /* General Colors for Dark Mode */
+    --scrollbar-color: #991b14;
+    --scrollbar-hover-color: #ebdbb2;
+
     --background-color: #000000;
     --text-color: #ebdbb2;
     --primary-text-color: #4caf50;
@@ -26,46 +27,49 @@
     --link-active-color: #1a5e2e;
     --link-visited-color: #8e44ad;
 
-    --button-bg-color: #252222;
-    --button-text-color: #ebdbb2;
+    --button-bg-color: var(--dock-bg-color);
+    --button-text-color: var(--text-color);
     --button-hover-bg-color: #f1605a;
     --button-hover-text-color: #000;
     --button-active-bg-color: #f1605a;
 
-    --border-color: #991B14;
+    --border-color: #991b14;
     --border-focus: #ebdbb2;
     --input-bg-color: #333333;
-    --input-text-color: #e0e0e0;
+    --input-text-color: #var(--text-color);
     --input-placeholder-color: #777777;
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --background-color: #ffffff;
-        --text-color: #333333;
-        --primary-text-color: #0077cc;
-        --secondary-text-color: #777777;
+/* @media (prefers-color-scheme: light) { */
+[data-theme="light"] {
+    --scrollbar-color: #991b14;
+    --scrollbar-hover-color: #000000;
 
-        --dock-bg-color: #0077cc;
+    --background-color: #efca88;
+    --text-color: #000000;
+    --primary-text-color: #0077cc;
+    --secondary-text-color: #777777;
 
-        --link-color: #0077cc;
-        --link-hover-color: #005fa3;
-        --link-active-color: #003f75;
-        --link-visited-color: #551a8b;
+    --dock-bg-color: #ebdbb2;
 
-        --button-bg-color: #0077cc;
-        --button-text-color: #ffffff;
-        --button-hover-bg-color: #005fa3;
-        --button-hover-text-color: #ffffff;
-        --button-active-bg-color: #003f75;
+    --link-color: #991b14;
+    --link-hover-color: #991b14;
+    --link-active-color: #1a5e2e;
+    --link-visited-color: #8e44ad;
 
-        --border-color: #cccccc;
-        --border-focus: #ebdbb2;
-        --input-bg-color: #ffffff;
-        --input-text-color: #333333;
-        --input-placeholder-color: #aaaaaa;
-    }
+    --button-bg-color: var(--dock-bg-color);
+    --button-text-color: var(--text-color);
+    --button-hover-bg-color: #991b14;
+    --button-hover-text-color: #ebdbb2;
+    --button-active-bg-color: #991b14;
+
+    --border-color: #991b14;
+    --border-focus: #000000;
+    --input-bg-color: #ebdbb2;
+    --input-text-color: var(--text-color);
+    --input-placeholder-color: #aaaaaa;
 }
+/* } */
 
 ::selection {
     background-color: var(--text-color);
@@ -82,9 +86,9 @@ input:focus {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-color);
-    font-size: 18px;
+    font-size: 20px;
     word-wrap: break-word;
     hyphens: auto;
     white-space: normal;
@@ -96,10 +100,10 @@ p {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 h3 {
     font-size: 1.5rem;
@@ -113,7 +117,7 @@ body {
     color: var(--text-color);
     font-family: var(--font-default);
     overflow-x: hidden;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     /* display: flex; */
     margin: 0;
 }
@@ -158,7 +162,7 @@ header {
     border-width: 0.2rem;
     /* height: 4rem; */
     width: 100%;
-    z-index: 3;
+    z-index: 1;
 }
 
 .nav-head img {
@@ -166,6 +170,10 @@ header {
     max-height: 100%;
     height: 2rem;
     width: 2rem;
+}
+
+.overflow-visible {
+    overflow: visible !important;
 }
 
 nav {
@@ -191,7 +199,6 @@ nav ul li {
     color: var(--text-color);
     padding: 0.8rem 1rem;
     font-size: 1rem;
-    font-weight: bold;
 }
 .nav-list a:hover,
 .nav-list a.active {
@@ -209,21 +216,17 @@ main {
     display: flex;
     justify-content: flex-start;
     /* min-height: 920px; */
-    height: 100vh;
-    position: sticky;
-    top 100px;
+    /* height: 100vh; */
+    /* position: sticky; */
+    /* top: 200px; */
+    z-index: 0;
 }
 
 .sticky {
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 0;
 }
-
-/* main, */
-/* footer { */
-/*     position: relative; */
-/* } */
 
 .container {
     background: transparent;
@@ -243,16 +246,12 @@ main {
     flex-direction: column;
 }
 
-.left-container {
-    width: 20%;
-}
-
-.right-container {
-    width: 20%;
+.left-container, .right-container {
+    width: 15%;
 }
 
 .center-container {
-    width: 60%;
+    width: 70%;
 }
 
 .align-center {
@@ -299,9 +298,10 @@ main {
 .search-bar input {
     padding: 0.2rem;
     width: 100%;
-    background-color: var(--dock-bg-color);
+    background-color: var(--input-bg-color);
     border: dashed;
     border-color: var(--border-color);
+    color: var(--input-text-color);
 }
 
 .search-bar input::placeholder {
@@ -325,7 +325,7 @@ main {
 table {
     width: 100%;
     background-color: transparent;
-    /*border: 3px solid var(--text-color);*/
+    /* border: 3px solid var(--text-color); */
     table-layout: fixed;
     max-width: 100%;
     overflow: auto;
@@ -334,7 +334,7 @@ table {
 
 thead {
     position: sticky;
-    z-index: 3;
+    z-index: 0;
 }
 
 th, td {
@@ -355,7 +355,7 @@ td {
     z-index: 0;
 }
 table tr td:nth-child(2) {
-    text-align: left; /* hoặc left, right tùy theo yêu cầu */
+    text-align: left;
 }
 /* Sticky table header */
 .table-container thead {
@@ -433,7 +433,7 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1rem;
     margin: 4px 2px;
     cursor: pointer;
     align-items: center;
@@ -580,6 +580,7 @@ footer {
     position: relative;
     width: 100%;
     border-top: 0.2rem dashed var(--border-color);
+    margin-top: 1rem;
 }
 
 /* Chrome, Edge, Safari */

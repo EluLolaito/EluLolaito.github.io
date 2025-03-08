@@ -1,32 +1,52 @@
 ---
 layout: default
 title: Sheets
-permalink: skysheets
+permalink: /skysheets
 ---
-<table class="table-container">
-    <thead style="visibility: visible">
-        <tr>
-            <th style="width: 5%">Ord.</th>
-            <th>Name</th>
-            <th>Author</th>
-            <th style="width: 10%;">Language</th>
-            <th style="width: 7%;">Length</th>
-            <th style="width: 10%;">Instrument</th>
-            <th style="width: 6%;">Major</th>
-            <th style="width: 6%;">BPM</th>
-            <th style="width: 12%;">Last updated</th>
-        </tr>
-    </thead>
-    <tbody id="music-table-body">
-        <!-- Music data will be dynamically added here -->
-    </tbody>
-</table>
-<div id="pagination" class="container row-container pagination">
-    <button id="prevPage" disabled>Previous</button>
-    <span id="pageInfo">Page </span>
-    <button id="nextPage">Next</button>
+<style>
+main .left-container, main .right-container {
+    width: 5%;
+}
+
+main .center-container {
+    width: 90%;
+}
+</style>
+
+<div class="container row-container">
+    <div class="container left-container"></div>
+
+    <div class="container column-container center-container">
+        <p class="align-center">Wait for the content loading</p>
+
+        <table class="table-container">
+            <thead style="visibility: visible">
+                <tr>
+                    <th style="width: 5%">Ord.</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th style="width: 10%;">Language</th>
+                    <th style="width: 7%;">Length</th>
+                    <th style="width: 10%;">Instrument</th>
+                    <th style="width: 6%;">Major</th>
+                    <th style="width: 6%;">BPM</th>
+                    <th style="width: 12%;">Last updated</th>
+                </tr>
+            </thead>
+            <tbody id="music-table-body">
+                <!-- Music data will be dynamically added here -->
+            </tbody>
+        </table>
+        <div id="pagination" class="container row-container pagination">
+            <button id="prevPage" disabled>Previous</button>
+            <span id="pageInfo">Page </span>
+            <button id="nextPage">Next</button>
+        </div>
+        <div id="loading" class="loading" style="display: none;">Loading...</div>
+    </div>
+
+    <div class="container right-container"></div>
 </div>
-<div id="loading" class="loading" style="display: none;">Loading...</div>
 
 <!-- Add the JavaScript file just before the closing body tag -->
 <script src="/src/main/cache.js"></script>
@@ -36,6 +56,5 @@ permalink: skysheets
     fetchCSV(); // Fetch CSV data
 </script>
 
-<canvas id="canvas"></canvas>
 <script src="/src/main/gsap.min.js"></script>
 <script src="/src/main/particles.js"></script>
