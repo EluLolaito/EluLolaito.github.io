@@ -65,6 +65,14 @@ jobs:
       - name: Build Jekyll Site with ENV
         run: JEKYLL_ENV=production SONGS_DATA="$SONGS_DATA" bundle exec jekyll build --verbose
 
+      - name: Copy sitemap.xml
+        run: cp _site/sitemap.xml sitemap.xml
+
+      - name: Commit and push sitemap
+        run: |
+          git add sitemap.xml
+          git diff --cached --quiet || (git commit -m "Update sitemap" && git push)
+
       - name: Debug Jekyll Data
         run: |
           pwd
