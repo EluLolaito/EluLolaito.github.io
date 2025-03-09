@@ -11,6 +11,10 @@ env:
   PAGES_REPO_NWO: EluLolaito/EluLolaito.github.io
 
 jobs:
+  deploy:
+    permissions:
+      contents: write
+
   build:
     runs-on: ubuntu-latest
 
