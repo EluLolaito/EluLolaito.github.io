@@ -69,6 +69,8 @@ jobs:
         run: cp _site/sitemap.xml sitemap.xml
 
       - name: Commit and push sitemap
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
