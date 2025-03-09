@@ -11,12 +11,11 @@ env:
   PAGES_REPO_NWO: EluLolaito/EluLolaito.github.io
 
 jobs:
-  deploy:
-    permissions:
-      contents: write
-
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
@@ -76,10 +75,16 @@ jobs:
         env:
           PAT: ${{ secrets.PAT_TOK }}
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
           git add sitemap.xml
-          git diff --cached --quiet || (git commit -m "Update sitemap" && git push https://x-access-token:${PAT}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }})
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update sitemap"
+            git push "https://${PAT}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref }}
+          fi
 
       - name: Debug Jekyll Data
         run: |
