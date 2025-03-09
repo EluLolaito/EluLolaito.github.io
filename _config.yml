@@ -28,6 +28,8 @@ url: "https://elulolaito.github.io" # the base hostname & protocol for your site
 repository: "EluLolaito/EluLolaito.github.io"
 # twitter_username: jekyllrb
 # github_username:  jekyll
+title: "L"
+description: "L's weblogs"
 
 safe: false
 
@@ -35,15 +37,29 @@ safe: false
 # theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+
 include:
-  - assets/html
   - _pages
+  - assets/html
 
 defaults:
   - scope:
       path: "_pages"
     values:
-      permalink: "/:basename/"
+      permalink: "/:basename"
+  - scope:
+      path: "_posts"
+    values:
+      permalink: "/:year/:title.html"
+
+# collections:
+#   projects:
+#     output: true
+#     permalink: "/projects/:name/"
+#   tutorials:
+#     output: true
+#     permalink: "/tutorials/:name/"
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
